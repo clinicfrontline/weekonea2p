@@ -1,33 +1,51 @@
 # weekonea2p
 
-The Week One AI lead-capture site: a home page with a working form, plus the
-privacy policy and terms of service pages a carrier reads during A2P 10DLC
-registration.
+The Week One AI A2P opt-in site: a home page, a privacy policy and terms of
+service — the three pages a carrier reads during A2P 10DLC registration.
 
-Plain HTML/CSS/JS. No build step, no dependencies, no framework — the repo is the
-deployable site.
+Plain HTML/CSS. No build step, no dependencies, no JavaScript of our own.
+The repo **is** the deployable site — turn on GitHub Pages (Settings → Pages →
+Source: `main`, root) and it serves as-is.
 
-## Files
+## Files and URLs
+
+Directory-based routing, so no `.html` ever appears in a URL:
 
 ```
-index.html            ← home page + the lead form
-privacy-policy.html
-terms.html
+index.html                  →  /
+privacy-policy/index.html   →  /privacy-policy
+terms/index.html            →  /terms
 assets/
 ├── css/styles.css
-├── js/form.js        ← validation + submit
-└── img/              ← logo, 3 icons, team photo, expertise background
+└── img/                    ←  logo, 3 icons, team photo, expertise background
 ```
 
-## Running it locally
+Asset and page links are **relative** (`assets/…` at root, `../assets/…` inside
+the two subdirectories) rather than root-absolute. That is deliberate: it works
+unchanged whether the site is served from a domain root or from a GitHub Pages
+project subpath like `/weekonea2p/`. Root-absolute `/assets/…` would break the
+second case.
 
-Open `index.html` in a browser directly, or serve the folder:
+## ⚠️ THE LEAD FORM WAS REMOVED — do not put it back
 
-```powershell
-npx --yes serve -l 8899 .
-```
+Removed 2026-08-04. GoHighLevel's **Business Website Compliance Checklist**
+(widget-first A2P path) requires:
 
-Then visit `http://127.0.0.1:8899/`.
+> *"I confirm that no forms collecting phone numbers or SMS opt-in consent exist
+> on any page where the chat widget is embedded. This includes contact forms, lead
+> forms, landing page forms, and appointment forms."*
+
+**The chat widget is the SMS opt-in method for this campaign.** A lead form with a
+phone field and consent checkboxes on the same page breaks that rule and risks the
+10DLC campaign being rejected. `index.html` carries a comment saying so at the
+point where the form used to be.
+
+Deleted with it: `assets/js/form.js`, and every form style in `styles.css`. The
+hero is now a single centred column — a half-empty two-column hero just reads as
+a broken layout.
+
+If the opt-in method is ever switched back to a form, the widget has to come off
+the site first. The two cannot coexist.
 
 ## The booking link and the chat widget
 
@@ -39,54 +57,17 @@ https://api.leadconnectorhq.com/widget/booking/gsqYXKN7wnsVUCwkFNJu
 ```
 
 Not the demo client's calendar. The agency sub-account's other calendar, *Strategy
-Call*, is `isActive: false` in GHL, so Consultation is the only bookable one — if
-Strategy Call is the one you want, activate it in GHL first and swap the id.
+Call*, is `isActive: false` in GHL, so Consultation is the only bookable one.
 
-The **GoHighLevel chat widget** (`data-widget-id="6a721a0437f916f4bc3f600c"`) loads
+⚠️ That booking page is an **appointment form that collects a phone number** — but
+it lives on `api.leadconnectorhq.com`, not on our site, so it is outside the scope
+of the checklist item above, which is limited to pages where our widget is
+embedded. Worth knowing if a reviewer follows the button.
+
+The **GoHighLevel chat widget** (`data-widget-id="6a72261ca4347d15e388669c"`) loads
 on all three pages, immediately before `</body>`.
 
-## ⚠️ Where the leads go — nowhere yet
-
-`assets/js/form.js` starts with:
-
-```js
-var ENDPOINT = null;
-```
-
-Set that to a URL that accepts a JSON `POST` — a GHL inbound webhook, a Supabase
-edge function, anything — and every submission is sent there.
-
-**Left as `null` the form still works end to end** — it validates, builds the
-payload and shows the thank-you panel — **but the lead goes nowhere and the
-visitor is not told.** The warning lives in the browser console instead: open
-DevTools and a submission prints `[lead-form] NO ENDPOINT SET — this lead was NOT
-sent anywhere` with the full payload. **Set `ENDPOINT` before this page takes real
-traffic.**
-
-The payload:
-
-```json
-{
-  "first_name": "Talha",
-  "last_name": "Test",
-  "phone": "(208) 555-0134",
-  "email": "talha@example.com",
-  "consent_marketing_sms": true,
-  "consent_transactional_sms": true,
-  "consent_text_shown": {
-    "marketing": "I consent to receive marketing text messages from company at …",
-    "transactional": "I consent to receive non-marketing text messages from company …"
-  },
-  "submitted_at": "2026-08-04T16:34:40.696Z",
-  "page_url": "http://127.0.0.1:8899/"
-}
-```
-
-`consent_text_shown` stores the exact wording that was on screen when the box was
-ticked. That is the record a carrier or a TCPA claim actually asks for — a boolean
-alone does not prove what the person agreed to.
-
-## Legal page values
+## Business details
 
 | Value | Setting |
 |---|---|
@@ -94,44 +75,37 @@ alone does not prove what the person agreed to.
 | Support email | `info@weekoneai.com` |
 | Business address | H-13 First Floor, Kailash Colony · New Delhi, Delhi 110048, India |
 | Business phone | `+91 8287773860` |
-| Company name | `WEEK ONE AI` — change if the entity signing the A2P registration differs |
+| Company name | `WEEK ONE AI` |
 
-The address, phone and email are the ones used to **verify the A2P brand**, and
-they appear in an `<address class="footer-contact">` block in the footer of **all
-three pages**, plus the privacy policy's §7 and the terms' §5. That placement is
-deliberate: GoHighLevel's Business Website Compliance Checklist requires the
-verifying address, email and phone to be present on the website. If the brand is
-ever re-verified with different details, those five places must change together.
+These are the details used to **verify the A2P brand**, and they appear in an
+`<address class="footer-contact">` block in the footer of all three pages, plus the
+privacy policy's §7 and the terms' §5 — five places that must change together if
+the brand is ever re-verified. The checklist requires the verifying address, email
+and phone to be present on the website.
 
-## ⚠️ Both consent boxes are mandatory — and that is worth a second look
+## Running it locally
 
-Set 2026-08-04: the form will not submit unless **both** consent checkboxes are
-ticked.
+`serve` resolves directory indexes, which is what makes the clean URLs work:
 
-The transactional box is uncontroversial. **Requiring the *marketing* box is the
-part to reconsider.** Under the TCPA, consent to receive marketing messages may not
-be a condition of getting something else, and carriers reviewing a 10DLC campaign
-look specifically for consent that was freely given. A required marketing checkbox
-is the pattern they are looking *for* — it makes every consent record this page
-produces arguably coerced, which weakens the exact evidence the page exists to
-create.
+```powershell
+npx --yes serve -l 8901 .
+```
 
-The safer shape, if it ever needs changing: keep the transactional box required,
-make the marketing box optional, and record whichever way it was left. The code
-already stores both flags independently, so this is a one-line change in
-`index.html` plus the matching check in `assets/js/form.js`.
+Then `http://127.0.0.1:8901/`, `/privacy-policy`, `/terms`.
 
-## ⚠️ Two things in the copy to decide on
+## ⚠️ Still open
 
-1. **"algorithmic trading services" / "algorithmic trading accounts"** appear in
-   the privacy policy (§2) and terms (§1). The privacy policy therefore describes
-   a business this site does not sell — the home page sells advertising. It should
-   almost certainly say advertising services.
-2. **"Avg rating 4.8"**, **"A+ Rating"** and **"Over 10+ Companies Have Grown
-   With Me"** are unsubstantiated claims. Week One AI's own brand rules ban
-   testimonials and client counts that aren't real.
-
-Neither is a code problem — both are decisions.
+- **The site is not hosted.** Nothing on the compliance checklist can be submitted
+  without a live URL. GitHub Pages needs no config here — the repo is already
+  static with an `index.html` at root.
+- **"algorithmic trading services"** appears in the privacy policy (§2) and terms
+  (§1), inherited verbatim from the reference site this was copied from. The
+  privacy policy therefore describes a business this site does not sell.
+- **"Avg rating 4.8"**, **"A+ Rating"** and **"Over 10+ Companies Have Grown With
+  Me"** are unsubstantiated claims, also inherited. `brand/guidelines.md` bans
+  testimonials and client counts that aren't real.
+- **A2P 10DLC is a US carrier programme** and this brand is registered in India
+  with a `+91` number. Non-US brands are vetted on a different track.
 
 ## Legal
 

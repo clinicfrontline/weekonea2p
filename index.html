@@ -14,21 +14,27 @@
 
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="index.html">
+    <a class="brand" href="./">
       <img src="assets/img/logo-w1.png" alt="Week One AI">
       <span class="brand-name">Week One<small>AI</small></span>
     </a>
     <nav class="nav">
-      <a href="index.html">Home</a>
-      <a href="privacy-policy.html">Privacy</a>
-      <a href="terms.html">Terms &amp; Conditions</a>
+      <a href="./">Home</a>
+      <a href="privacy-policy/">Privacy</a>
+      <a href="terms/">Terms &amp; Conditions</a>
     </nav>
   </div>
 </header>
 
+<!-- ⚠️ NO LEAD FORM ON THIS PAGE, DELIBERATELY — removed 2026-08-04.
+     GoHighLevel's A2P Business Website Compliance Checklist (widget-first path)
+     requires that no form collecting a phone number or SMS opt-in consent exists
+     on any page where the chat widget is embedded. The chat widget at the bottom
+     of this file IS the opt-in method. Putting a lead form back here re-breaks
+     that rule and risks the 10DLC campaign being rejected. -->
+
 <section class="hero">
   <div class="wrap">
-
     <div class="hero-copy">
       <h1>Exceptional Advertisting for Chiropractor Business Growth</h1>
       <h2>A+ Rating</h2>
@@ -38,58 +44,6 @@
       <a class="cta" href="https://api.leadconnectorhq.com/widget/booking/gsqYXKN7wnsVUCwkFNJu"
          target="_blank" rel="noopener noreferrer">Schedule A Call Today with Me</a>
     </div>
-
-    <div class="form-card" id="form-card">
-      <form id="lead-form" novalidate>
-
-        <div class="field">
-          <label for="first_name">First Name</label>
-          <input type="text" id="first_name" name="first_name" placeholder="First Name" autocomplete="given-name">
-        </div>
-
-        <div class="field">
-          <label for="last_name">Last Name</label>
-          <input type="text" id="last_name" name="last_name" placeholder="Last Name" autocomplete="family-name">
-        </div>
-
-        <div class="field">
-          <label for="phone">Phone <span class="req">*</span></label>
-          <input type="tel" id="phone" name="phone" placeholder="Phone" autocomplete="tel" required>
-        </div>
-
-        <div class="field">
-          <label for="email">Email <span class="req">*</span></label>
-          <div class="input-shell">
-            <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-              <rect x="2" y="4" width="20" height="16" rx="2"></rect>
-              <path d="m2 7 10 6 10-6"></path>
-            </svg>
-            <input class="has-ico" type="email" id="email" name="email" placeholder="Email" autocomplete="email" required>
-          </div>
-        </div>
-
-        <div class="consent">
-          <input type="checkbox" id="consent_marketing" name="consent_marketing" required>
-          <label for="consent_marketing">I consent to receive marketing text messages from company at the phone number provided. Frequency may vary. Message &amp; data rates may apply. Text HELP for assistance, reply STOP to opt out.</label>
-        </div>
-
-        <div class="consent">
-          <input type="checkbox" id="consent_transactional" name="consent_transactional" required>
-          <label for="consent_transactional">I consent to receive non-marketing text messages from company about my order updates, appointment reminders etc. Message &amp; data rates may apply.</label>
-        </div>
-
-        <button class="submit" type="submit">Submit</button>
-
-        <p class="form-status" id="form-status"></p>
-
-        <p class="form-legal">
-          <a href="privacy-policy.html">Privacy Policy</a> |
-          <a href="terms.html">Terms of Service</a>
-        </p>
-
-      </form>
-    </div>
-
   </div>
 </section>
 
@@ -163,13 +117,13 @@
 
 <footer class="site-footer">
   <div class="wrap">
-    <a class="brand" href="index.html">
+    <a class="brand" href="./">
       <img src="assets/img/logo-w1.png" alt="Week One AI">
       <span class="brand-name">Week One<small>AI</small></span>
     </a>
     <p class="footer-legal">
-      <a href="privacy-policy.html">Privacy Policy</a> |
-      <a href="terms.html">Terms of Service</a>
+      <a href="privacy-policy/">Privacy Policy</a> |
+      <a href="terms/">Terms of Service</a>
     </p>
     <address class="footer-contact">
       <strong>WEEK ONE AI</strong><br>
@@ -181,9 +135,7 @@
   </div>
 </footer>
 
-<script src="assets/js/form.js"></script>
-
-<!-- GoHighLevel chat widget -->
+<!-- GoHighLevel chat widget — THE SMS opt-in method for the A2P campaign. -->
 <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js" data-widget-id="6a72261ca4347d15e388669c" data-source="WEB_USER"></script>
 </body>
 </html>

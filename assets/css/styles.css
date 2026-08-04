@@ -1,8 +1,12 @@
 /* ==========================================================================
-   Week One AI — form-fill site
+   Week One AI — A2P opt-in site
    Layout and colour values are measured from the reference page
-   (alignmentautomated.net): blue #188BF6, CTA #0033FF, submit #18BD5B,
-   grey band #F5F5F5, Roboto 500 headings.
+   (alignmentautomated.net): blue #188BF6, CTA #0033FF, grey band #F5F5F5,
+   Roboto 500 headings.
+
+   The lead-form styles that used to live here were deleted with the form
+   itself (2026-08-04) — see the comment in index.html for why it must not
+   come back while the chat widget is the A2P opt-in method.
    ========================================================================== */
 
 *,
@@ -12,12 +16,9 @@
 :root {
   --blue: #188bf6;
   --cta-blue: #0033ff;
-  --green: #18bd5b;
   --grey-band: #f5f5f5;
   --ink: #000000;
   --body-text: #2f2f2f;
-  --field-border: #cfcfcf;
-  --placeholder: #b8909a;
   --link: #1155cc;
   --font: "Roboto", "Helvetica Neue", Arial, "Segoe UI", sans-serif;
 }
@@ -110,11 +111,11 @@ a { color: inherit; }
   padding: 60px 0 70px;
 }
 
+/* Single column since the lead form was removed for A2P compliance — a
+   half-empty two-column hero just reads as a broken layout. */
 .hero .wrap {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
-  align-items: center;
+  max-width: 900px;
+  text-align: center;
 }
 
 .hero h1 {
@@ -152,143 +153,6 @@ a { color: inherit; }
 }
 
 .cta:hover { filter: brightness(1.15); }
-
-/* ---------- Form card ------------------------------------------------- */
-
-.form-card {
-  background: #fff;
-  border: 6px solid #000;
-  padding: 40px 36px 30px;
-}
-
-.field { margin-bottom: 18px; }
-
-.field label {
-  display: block;
-  font-size: 14px;
-  font-weight: 500;
-  color: #1a2b4a;
-  margin-bottom: 6px;
-}
-
-.field .req { color: #d93025; }
-
-.input-shell { position: relative; }
-
-.input-shell .ico {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 17px;
-  height: 17px;
-  color: #7a7a7a;
-  pointer-events: none;
-}
-
-.field input[type="text"],
-.field input[type="tel"],
-.field input[type="email"] {
-  width: 100%;
-  font-family: var(--font);
-  font-size: 14px;
-  color: #222;
-  padding: 11px 12px;
-  border: 1px solid var(--field-border);
-  border-radius: 4px;
-  background: #fff;
-}
-
-.field input.has-ico { padding-left: 38px; }
-
-.field input::placeholder { color: var(--placeholder); }
-
-.field input:focus {
-  outline: none;
-  border-color: var(--blue);
-  box-shadow: 0 0 0 2px rgba(24, 139, 246, 0.18);
-}
-
-.field input:user-invalid {
-  border-color: #d93025;
-}
-
-.consent {
-  display: grid;
-  grid-template-columns: 20px 1fr;
-  gap: 12px;
-  align-items: start;
-  margin-bottom: 16px;
-}
-
-.consent input[type="checkbox"] {
-  width: 14px;
-  height: 14px;
-  margin: 3px 0 0;
-  accent-color: var(--blue);
-}
-
-.consent label {
-  font-size: 13px;
-  line-height: 1.45;
-  color: #3a3a3a;
-  text-align: justify;
-}
-
-.submit {
-  width: 100%;
-  margin-top: 12px;
-  background: var(--green);
-  color: #fff;
-  font-family: var(--font);
-  font-size: 14px;
-  font-weight: 500;
-  border: 0;
-  border-radius: 5px;
-  padding: 12px 50px;
-  cursor: pointer;
-}
-
-.submit:hover { filter: brightness(1.06); }
-
-.submit:disabled { opacity: 0.6; cursor: default; }
-
-.form-legal {
-  text-align: center;
-  font-size: 13px;
-  margin: 18px 0 0;
-}
-
-.form-legal a { color: var(--link); }
-
-.form-status {
-  margin: 14px 0 0;
-  font-size: 14px;
-  text-align: center;
-  min-height: 1px;
-}
-
-.form-status.error { color: #d93025; }
-
-.form-status.ok { color: #146c2e; font-weight: 500; }
-
-.form-done {
-  text-align: center;
-  padding: 30px 0;
-}
-
-.form-done h3 {
-  font-size: 24px;
-  font-weight: 500;
-  color: #1a2b4a;
-  margin: 0 0 10px;
-}
-
-.form-done p {
-  font-size: 15px;
-  margin: 0;
-  color: #3a3a3a;
-}
 
 /* ---------- Expertise band (dark photo) -------------------------------- */
 
@@ -525,7 +389,6 @@ a { color: inherit; }
 /* ---------- Responsive -------------------------------------------------- */
 
 @media (max-width: 900px) {
-  .hero .wrap,
   .solution .wrap { grid-template-columns: 1fr; gap: 40px; }
 
   .hero h1 { font-size: 40px; }
@@ -546,7 +409,6 @@ a { color: inherit; }
 }
 
 @media (max-width: 520px) {
-  .form-card { padding: 26px 20px 22px; border-width: 4px; }
   .hero h1 { font-size: 32px; }
   .cta { padding: 14px 20px; font-size: 15px; }
 }
