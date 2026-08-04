@@ -64,7 +64,7 @@ it lives on `api.leadconnectorhq.com`, not on our site, so it is outside the sco
 of the checklist item above, which is limited to pages where our widget is
 embedded. Worth knowing if a reviewer follows the button.
 
-The **GoHighLevel chat widget** (`data-widget-id="6a72261ca4347d15e388669c"`) loads
+The **GoHighLevel chat widget** (`data-widget-id="6a72374e37f916f4bc476efe"`) loads
 on all three pages, immediately before `</body>`.
 
 ## Business details
