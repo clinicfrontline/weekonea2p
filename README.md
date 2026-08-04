@@ -91,8 +91,17 @@ alone does not prove what the person agreed to.
 | Value | Setting |
 |---|---|
 | Effective date | `February 27th, 2026` |
-| Support email | `info@weekoneai.com`, on both pages, as a `mailto:` link |
+| Support email | `info@weekoneai.com` |
+| Business address | H-13 First Floor, Kailash Colony · New Delhi, Delhi 110048, India |
+| Business phone | `+91 8287773860` |
 | Company name | `WEEK ONE AI` — change if the entity signing the A2P registration differs |
+
+The address, phone and email are the ones used to **verify the A2P brand**, and
+they appear in an `<address class="footer-contact">` block in the footer of **all
+three pages**, plus the privacy policy's §7 and the terms' §5. That placement is
+deliberate: GoHighLevel's Business Website Compliance Checklist requires the
+verifying address, email and phone to be present on the website. If the brand is
+ever re-verified with different details, those five places must change together.
 
 ## ⚠️ Both consent boxes are mandatory — and that is worth a second look
 
