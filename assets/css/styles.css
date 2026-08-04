@@ -1,0 +1,554 @@
+/* ==========================================================================
+   Week One AI — form-fill site
+   Layout and colour values are measured from the reference page
+   (alignmentautomated.net): blue #188BF6, CTA #0033FF, submit #18BD5B,
+   grey band #F5F5F5, Roboto 500 headings.
+   ========================================================================== */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+:root {
+  --blue: #188bf6;
+  --cta-blue: #0033ff;
+  --green: #18bd5b;
+  --grey-band: #f5f5f5;
+  --ink: #000000;
+  --body-text: #2f2f2f;
+  --field-border: #cfcfcf;
+  --placeholder: #b8909a;
+  --link: #1155cc;
+  --font: "Roboto", "Helvetica Neue", Arial, "Segoe UI", sans-serif;
+}
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  color: var(--body-text);
+  background: #ffffff;
+  line-height: 1.5;
+}
+
+img { max-width: 100%; display: block; }
+
+a { color: inherit; }
+
+.wrap {
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ---------- Header ---------------------------------------------------- */
+
+.site-header {
+  background: #fff;
+  padding: 14px 0;
+}
+
+.site-header .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--ink);
+}
+
+.brand img {
+  width: 46px;
+  height: 46px;
+  border-radius: 11px;
+}
+
+.brand-name {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+.brand-name small {
+  display: block;
+  font-size: 9px;
+  font-weight: 400;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: #6b6b6b;
+  margin-top: 2px;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.nav a {
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 400;
+}
+
+.nav a:hover { text-decoration: underline; }
+
+/* ---------- Hero ------------------------------------------------------ */
+
+.hero {
+  background: var(--blue);
+  padding: 60px 0 70px;
+}
+
+.hero .wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.hero h1 {
+  font-size: 58px;
+  line-height: 1.15;
+  font-weight: 500;
+  color: #fff;
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.hero h2 {
+  font-size: 38px;
+  font-weight: 500;
+  color: #fff;
+  margin: 14px 0 0;
+}
+
+.hero p {
+  font-size: 20px;
+  color: #fff;
+  margin: 22px 0 0;
+}
+
+.cta {
+  display: inline-block;
+  margin-top: 40px;
+  background: var(--cta-blue);
+  color: #fff;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  padding: 16px 32px;
+  border-radius: 5px;
+}
+
+.cta:hover { filter: brightness(1.15); }
+
+/* ---------- Form card ------------------------------------------------- */
+
+.form-card {
+  background: #fff;
+  border: 6px solid #000;
+  padding: 40px 36px 30px;
+}
+
+.field { margin-bottom: 18px; }
+
+.field label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  color: #1a2b4a;
+  margin-bottom: 6px;
+}
+
+.field .req { color: #d93025; }
+
+.input-shell { position: relative; }
+
+.input-shell .ico {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 17px;
+  height: 17px;
+  color: #7a7a7a;
+  pointer-events: none;
+}
+
+.field input[type="text"],
+.field input[type="tel"],
+.field input[type="email"] {
+  width: 100%;
+  font-family: var(--font);
+  font-size: 14px;
+  color: #222;
+  padding: 11px 12px;
+  border: 1px solid var(--field-border);
+  border-radius: 4px;
+  background: #fff;
+}
+
+.field input.has-ico { padding-left: 38px; }
+
+.field input::placeholder { color: var(--placeholder); }
+
+.field input:focus {
+  outline: none;
+  border-color: var(--blue);
+  box-shadow: 0 0 0 2px rgba(24, 139, 246, 0.18);
+}
+
+.field input:user-invalid {
+  border-color: #d93025;
+}
+
+.consent {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 12px;
+  align-items: start;
+  margin-bottom: 16px;
+}
+
+.consent input[type="checkbox"] {
+  width: 14px;
+  height: 14px;
+  margin: 3px 0 0;
+  accent-color: var(--blue);
+}
+
+.consent label {
+  font-size: 13px;
+  line-height: 1.45;
+  color: #3a3a3a;
+  text-align: justify;
+}
+
+.submit {
+  width: 100%;
+  margin-top: 12px;
+  background: var(--green);
+  color: #fff;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 500;
+  border: 0;
+  border-radius: 5px;
+  padding: 12px 50px;
+  cursor: pointer;
+}
+
+.submit:hover { filter: brightness(1.06); }
+
+.submit:disabled { opacity: 0.6; cursor: default; }
+
+.form-legal {
+  text-align: center;
+  font-size: 13px;
+  margin: 18px 0 0;
+}
+
+.form-legal a { color: var(--link); }
+
+.form-status {
+  margin: 14px 0 0;
+  font-size: 14px;
+  text-align: center;
+  min-height: 1px;
+}
+
+.form-status.error { color: #d93025; }
+
+.form-status.ok { color: #146c2e; font-weight: 500; }
+
+.form-done {
+  text-align: center;
+  padding: 30px 0;
+}
+
+.form-done h3 {
+  font-size: 24px;
+  font-weight: 500;
+  color: #1a2b4a;
+  margin: 0 0 10px;
+}
+
+.form-done p {
+  font-size: 15px;
+  margin: 0;
+  color: #3a3a3a;
+}
+
+/* ---------- Expertise band (dark photo) -------------------------------- */
+
+.expertise {
+  background: #000 url("../img/expertise-bg.jpg") center / cover no-repeat;
+  padding: 60px 0 80px;
+  color: #fff;
+  position: relative;
+}
+
+.expertise::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.expertise .wrap { position: relative; }
+
+.section-title {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 500;
+  margin: 0 0 46px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.card { text-align: center; }
+
+.card .disc {
+  width: 136px;
+  height: 136px;
+  margin: 0 auto 22px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* The source PNGs carry a lot of transparent padding — the glyph is roughly
+   40% of the 219px canvas — so the img box has to be near disc-width for the
+   glyph itself to come out the size it is on the reference page. */
+.card .disc img { width: 128px; height: auto; }
+
+.card h3 {
+  font-size: 20px;
+  font-weight: 500;
+  margin: 0 0 10px;
+}
+
+.card p {
+  font-size: 15px;
+  margin: 0;
+  line-height: 1.45;
+}
+
+/* ---------- Solution split -------------------------------------------- */
+
+.solution { background: #fff; padding: 60px 0; }
+
+.solution .wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 46px;
+  align-items: center;
+}
+
+.solution h2 {
+  font-size: 40px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--ink);
+  margin: 0 0 20px;
+  letter-spacing: -0.01em;
+}
+
+.solution p {
+  font-size: 16px;
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* ---------- Services band --------------------------------------------- */
+
+.services {
+  background: var(--grey-band);
+  padding: 60px 0 80px;
+  color: var(--ink);
+}
+
+.services .section-title {
+  font-size: 46px;
+  margin-bottom: 50px;
+}
+
+.services .card h3 { color: var(--ink); }
+
+.services .card p { color: var(--body-text); }
+
+/* ---------- Proof band ------------------------------------------------- */
+
+.proof {
+  background: var(--blue);
+  color: #fff;
+  padding: 60px 0 90px;
+  text-align: center;
+}
+
+.proof h2 {
+  font-size: 38px;
+  font-weight: 500;
+  margin: 0 0 18px;
+}
+
+.proof p {
+  font-size: 19px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* ---------- Footer ----------------------------------------------------- */
+
+.site-footer {
+  background: #fff;
+  padding: 70px 0;
+}
+
+.site-footer .wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 90px;
+  flex-wrap: wrap;
+}
+
+.site-footer .brand-name { font-size: 34px; }
+
+.site-footer .brand img { width: 58px; height: 58px; border-radius: 14px; }
+
+.footer-legal {
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.footer-legal a { text-decoration: none; }
+
+.footer-legal a:hover { text-decoration: underline; }
+
+/* ---------- Legal pages ------------------------------------------------ */
+
+.legal-hero {
+  background: var(--blue);
+  color: #fff;
+  padding: 46px 0;
+}
+
+.legal-hero h1 {
+  font-size: 46px;
+  font-weight: 500;
+  margin: 0;
+  text-align: center;
+}
+
+.legal {
+  padding: 50px 0 80px;
+  max-width: 900px;
+}
+
+.legal h2 {
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--ink);
+  margin: 34px 0 10px;
+}
+
+.legal h3 {
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--ink);
+  margin: 22px 0 8px;
+}
+
+.legal p {
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0 0 14px;
+}
+
+.legal ul {
+  margin: 0 0 14px;
+  padding-left: 22px;
+}
+
+.legal li {
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 6px;
+}
+
+.legal .eff {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.legal a { color: var(--link); }
+
+/* A value the business owner still has to supply. Deliberately loud so it
+   cannot ship unnoticed. */
+.todo {
+  background: #fff3a3;
+  color: #6b4d00;
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: 3px;
+}
+
+.todo-banner {
+  background: #fff3a3;
+  border: 2px solid #e0b400;
+  color: #5a4100;
+  font-size: 14px;
+  padding: 12px 16px;
+  border-radius: 4px;
+  margin: 0 0 26px;
+}
+
+/* ---------- Responsive -------------------------------------------------- */
+
+@media (max-width: 900px) {
+  .hero .wrap,
+  .solution .wrap { grid-template-columns: 1fr; gap: 40px; }
+
+  .hero h1 { font-size: 40px; }
+  .hero h2 { font-size: 30px; }
+  .solution h2 { font-size: 30px; }
+  .services .section-title { font-size: 32px; }
+  .proof h2 { font-size: 28px; }
+  .legal-hero h1 { font-size: 32px; }
+
+  .cards { grid-template-columns: 1fr; gap: 44px; }
+
+  .site-header .wrap { flex-direction: column; gap: 16px; }
+  .nav { gap: 24px; }
+
+  .site-footer .wrap { flex-direction: column; gap: 30px; }
+  .footer-legal { font-size: 20px; }
+}
+
+@media (max-width: 520px) {
+  .form-card { padding: 26px 20px 22px; border-width: 4px; }
+  .hero h1 { font-size: 32px; }
+  .cta { padding: 14px 20px; font-size: 15px; }
+}
