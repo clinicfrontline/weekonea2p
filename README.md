@@ -94,6 +94,24 @@ alone does not prove what the person agreed to.
 | Support email | `info@weekoneai.com`, on both pages, as a `mailto:` link |
 | Company name | `WEEK ONE AI` — change if the entity signing the A2P registration differs |
 
+## ⚠️ Both consent boxes are mandatory — and that is worth a second look
+
+Set 2026-08-04: the form will not submit unless **both** consent checkboxes are
+ticked.
+
+The transactional box is uncontroversial. **Requiring the *marketing* box is the
+part to reconsider.** Under the TCPA, consent to receive marketing messages may not
+be a condition of getting something else, and carriers reviewing a 10DLC campaign
+look specifically for consent that was freely given. A required marketing checkbox
+is the pattern they are looking *for* — it makes every consent record this page
+produces arguably coerced, which weakens the exact evidence the page exists to
+create.
+
+The safer shape, if it ever needs changing: keep the transactional box required,
+make the marketing box optional, and record whichever way it was left. The code
+already stores both flags independently, so this is a one-line change in
+`index.html` plus the matching check in `assets/js/form.js`.
+
 ## ⚠️ Two things in the copy to decide on
 
 1. **"algorithmic trading services" / "algorithmic trading accounts"** appear in

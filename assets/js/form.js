@@ -62,6 +62,21 @@ var ENDPOINT = null; // e.g. "https://services.leadconnectorhq.com/hooks/xxxx"
       return;
     }
 
+    // Both consent boxes are mandatory (Talha's instruction, 2026-08-04). See the
+    // note in README — requiring the MARKETING box in particular is worth a second
+    // look before this page takes real traffic.
+    if (!form.consent_marketing.checked) {
+      say("Please tick the box consenting to marketing text messages.", "error");
+      form.consent_marketing.focus();
+      return;
+    }
+
+    if (!form.consent_transactional.checked) {
+      say("Please tick the box consenting to non-marketing text messages.", "error");
+      form.consent_transactional.focus();
+      return;
+    }
+
     var payload = {
       first_name: (data.get("first_name") || "").toString().trim(),
       last_name: (data.get("last_name") || "").toString().trim(),
