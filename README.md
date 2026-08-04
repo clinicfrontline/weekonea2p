@@ -29,7 +29,23 @@ npx --yes serve -l 8899 .
 
 Then visit `http://127.0.0.1:8899/`.
 
-## Where the leads go
+## The booking link and the chat widget
+
+**"Schedule A Call Today with Me"** points at the **agency** GoHighLevel
+sub-account (`ApNfHZMqAvnu2Cf6w9Ch`), calendar **Consultation**, 30 min:
+
+```
+https://api.leadconnectorhq.com/widget/booking/gsqYXKN7wnsVUCwkFNJu
+```
+
+Not the demo client's calendar. The agency sub-account's other calendar, *Strategy
+Call*, is `isActive: false` in GHL, so Consultation is the only bookable one — if
+Strategy Call is the one you want, activate it in GHL first and swap the id.
+
+The **GoHighLevel chat widget** (`data-widget-id="6a721a0437f916f4bc3f600c"`) loads
+on all three pages, immediately before `</body>`.
+
+## ⚠️ Where the leads go — nowhere yet
 
 `assets/js/form.js` starts with:
 
@@ -40,10 +56,12 @@ var ENDPOINT = null;
 Set that to a URL that accepts a JSON `POST` — a GHL inbound webhook, a Supabase
 edge function, anything — and every submission is sent there.
 
-**Left as `null`, the form still works end to end.** It validates, builds the
-payload, prints it to the browser console and shows the thank-you panel — and the
-panel says out loud that no endpoint is configured, so a lead can never look
-delivered when it wasn't.
+**Left as `null` the form still works end to end** — it validates, builds the
+payload and shows the thank-you panel — **but the lead goes nowhere and the
+visitor is not told.** The warning lives in the browser console instead: open
+DevTools and a submission prints `[lead-form] NO ENDPOINT SET — this lead was NOT
+sent anywhere` with the full payload. **Set `ENDPOINT` before this page takes real
+traffic.**
 
 The payload:
 
@@ -68,23 +86,13 @@ The payload:
 ticked. That is the record a carrier or a TCPA claim actually asks for — a boolean
 alone does not prove what the person agreed to.
 
-## ⚠️ Two values are still missing — do not submit this URL to a carrier yet
+## Legal page values
 
-Both legal pages carry a yellow banner and yellow-highlighted placeholders, and
-**they are visible to anyone who opens the page**. Find and replace in
-`privacy-policy.html` and `terms.html`:
-
-| Placeholder | What it needs |
+| Value | Setting |
 |---|---|
-| `[EFFECTIVE DATE]` | The date these terms take effect. |
-| `[SUPPORT EMAIL]` | The address that answers HELP replies and privacy requests. |
-
-They are placeholders rather than guesses on purpose: an effective date and a
-support address on a legal page are business facts, and a plausible-looking wrong
-one is worse than a visible gap.
-
-The company name is set to **WEEK ONE AI**. If the entity that signs the A2P
-registration is a different registered name, change it in both files.
+| Effective date | `February 27th, 2026` |
+| Support email | `info@weekoneai.com`, on both pages, as a `mailto:` link |
+| Company name | `WEEK ONE AI` — change if the entity signing the A2P registration differs |
 
 ## ⚠️ Two things in the copy to decide on
 

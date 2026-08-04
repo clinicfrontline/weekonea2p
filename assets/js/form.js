@@ -28,12 +28,11 @@ var ENDPOINT = null; // e.g. "https://services.leadconnectorhq.com/hooks/xxxx"
     status.className = "form-status" + (kind ? " " + kind : "");
   }
 
-  function showThanks(note) {
+  function showThanks() {
     card.innerHTML =
       '<div class="form-done">' +
       "<h3>Thank you.</h3>" +
       "<p>Your details are in. I will be in touch shortly.</p>" +
-      (note ? '<p style="margin-top:14px;font-size:13px;color:#7a7a7a">' + note + "</p>" : "") +
       "</div>";
   }
 
@@ -85,10 +84,16 @@ var ENDPOINT = null; // e.g. "https://services.leadconnectorhq.com/hooks/xxxx"
     };
 
     if (!ENDPOINT) {
-      // No destination configured. Say so plainly rather than pretending a
-      // lead was delivered somewhere.
-      console.log("[lead-form] no ENDPOINT set — payload was:", payload);
-      showThanks("No submission endpoint is configured yet, so this lead was logged to the browser console instead of being sent. Set ENDPOINT in assets/js/form.js.");
+      // No destination configured. The visitor sees the plain thank-you (Talha's
+      // call, 2026-08-04 — the old on-screen warning was developer-facing text on
+      // a customer page). The warning still exists, loudly, in the console: a lead
+      // must never be lost without a trace, even when the page looks calm.
+      console.warn(
+        "[lead-form] NO ENDPOINT SET — this lead was NOT sent anywhere. " +
+          "Set ENDPOINT at the top of assets/js/form.js. Payload:",
+        payload
+      );
+      showThanks();
       return;
     }
 
@@ -102,7 +107,7 @@ var ENDPOINT = null; // e.g. "https://services.leadconnectorhq.com/hooks/xxxx"
     })
       .then(function (response) {
         if (!response.ok) throw new Error("HTTP " + response.status);
-        showThanks("");
+        showThanks();
       })
       .catch(function (error) {
         button.disabled = false;
